@@ -36,6 +36,14 @@
 
 ---
 
+## Showcase
+
+### Arrow Selection
+
+https://gyazo.com/0dc86c6a645ebc3b6fe3bc98288a8269
+
+---
+
 ## Features
 
 ### Core Engine
@@ -513,6 +521,7 @@ end
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
 
 local Quantum = require(ReplicatedStorage:WaitForChild("Quantum"))
 
@@ -526,33 +535,38 @@ rayParams.FilterType = Enum.RaycastFilterType.Exclude
 rayParams.FilterDescendantsInstances = { character }
 
 local function fireGrapple()
-    local camera = Workspace.CurrentCamera
-    if not camera then return end
+	local camera = Workspace.CurrentCamera
+	if not camera then return end
 
-    local origin = camera.CFrame.Position
-    local dir = (mouse.Hit.Position - origin).Unit * 200
-    local result = Workspace:Raycast(origin, dir, rayParams)
-    if not result then return end
+	local origin = camera.CFrame.Position
+	local dir = (mouse.Hit.Position - origin).Unit * 200
+	local result = Workspace:Raycast(origin, dir, rayParams)
+	if not result then return end
 
-    local hitPos = result.Position
-    local startPos = hrp.Position
-    local direction = (hitPos - startPos)
-    local unitDir = direction.Unit
+	local hitPos = result.Position
+	local startPos = hrp.Position
+	local direction = (hitPos - startPos)
+	local unitDir = direction.Unit
 
-    local motor = Quantum.ValueSpring(0, {
-        stiffness = 20,
-        damping = 3,
-        onStep = function(alpha)
-            alpha = math.clamp(alpha, 0, 1.1)
-            local pos = startPos:Lerp(hitPos + unitDir * 2, alpha)
-            hrp.CFrame = CFrame.new(pos, pos + unitDir)
-        end,
-    })
+	local motor = Quantum.ValueSpring(0, {
+		stiffness = 20,
+		damping = 3,
+		onStep = function(alpha)
+			alpha = math.clamp(alpha, 0, 1.1)
+			local pos = startPos:Lerp(hitPos + unitDir * 2, alpha)
+			hrp.CFrame = CFrame.new(pos, pos + unitDir)
+		end,
+	})
 
-    motor:SetTarget(1.1)
+	motor:SetTarget(1.1)
 end
 
-mouse.Button1Down:Connect(fireGrapple)
+UserInputService.InputBegan:Connect(function(input, gp)
+	if gp then return end
+	if input.KeyCode == Enum.KeyCode.Q then
+		fireGrapple()
+	end
+end)
 ```
 
 ---
