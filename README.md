@@ -1,7 +1,5 @@
 # Quantum
 
-# Quantum
-
 > **Quantum** is a spring-driven tween engine for Roblox that unifies **UI animation**, **camera & movement feel**, and **lightweight physics-style behaviours** under one clean API.
 
 - Spring-based instead of step tweens – everything eases, overshoots, and settles.
@@ -31,7 +29,6 @@
 - [Relationship Systems](#relationship-systems)
 - [API Overview](#api-overview)
 - [Design Philosophy](#design-philosophy)
-- [Roadmap](#roadmap)
 - [License](#license)
 
 ---
