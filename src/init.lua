@@ -2,6 +2,11 @@ local Engine = require(script.Engine.Engine)
 local Presets = require(script.Profiles.Presets)
 local TweenServiceFactory = require(script.Compat.TweenService)
 
+local Sequence = require(script.Engine.Sequence)
+local Track = require(script.Engine.Track)
+local Patterns = require(script.Profiles.Patterns)
+local Baseline = require(script.Util.Baseline)
+
 local Quantum = {}
 
 local defaultEngine = Engine.new({
@@ -42,5 +47,12 @@ end
 function Quantum.Relationship.RagdollUI(config)
 	return defaultEngine:RagdollUI(config)
 end
+
+Sequence._setQuantumAPI(Quantum)
+Quantum.Sequence = Sequence
+Quantum.Track = Track
+
+Quantum.Patterns = Patterns
+Quantum.Baseline = Baseline
 
 return Quantum
