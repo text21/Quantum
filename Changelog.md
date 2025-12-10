@@ -63,16 +63,7 @@ All notable changes to **Quantum Tween Engine** will be documented in this file.
 - Link: https://gyazo.com/25a22b73d3f718a16964bf0e324c61e0
 
 ### Fixed / Improved
-
-- **Safe value scaling in Patterns**
-
-  - Added `scaleValue` helper to correctly scale `UDim2`, `Vector2`, `Vector3`, and numbers.
-  - Fixed `attempt to perform arithmetic (mul) on UDim2 and number` errors in early `RewardPop` implementation.
-
-- **Smoother state transitions**
-
-  - Cleaned up hover/press/release logic to avoid competing animations (no more “laggy” feel when releasing or leaving while pressed).
-  - All button tweens now blend from **current** value back to **captured baseline**.
+None This Update.
 
 - **Example LocalScript**
 
